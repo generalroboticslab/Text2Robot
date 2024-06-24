@@ -1,0 +1,90 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Remote Attach",
+            "type": "debugpy",
+            "request": "attach",
+            "connect": {
+                "host": "localhost",
+                "port": 5678
+            }
+        },
+        {
+            "name": "Python: train.py",
+            "type": "python",
+            "request": "launch",
+            "program": "train.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "cwd": "${workspaceFolder}",
+            // "env": {
+            //     "LD_LIBRARY_PATH":"${CONDA_PREFIX}/lib"
+            // },
+            // "args": [
+            //     "task=A1Terrain",
+            //     // "task=AnymalTerrain",
+            //     "task.env.numEnvs=32",
+            //     "task.env.terrain.numLevels=5",
+            //     "task.env.terrain.numTerrains=20",
+            //     "train.params.config.horizon_length=24",
+            //     "train.params.config.minibatch_size=768",
+            //     "hydra.run.dir=./tmp/terrain",
+            //     // "checkpoint=outputs/A1Terrain/2022-04-27_00-08-06/runs/a1Terrain/nn/last_a1Terrain_ep_1500_rew_17.872902.pth"
+            // ]
+
+            "args": [
+                "task=A1Terrain",
+                "task.env.terrain.terrainType=plane",
+                "test=true",
+                "task.env.dataPublisher.enable=True",
+
+                // "headless=true",
+                // "task=AnymalTerrain",
+                // "test=true",
+                
+                // "export=false",
+                // "+use_exported_model=/home/boxi/repo/legged_envs/legged_envs/tmp/saved.onnx",
+                // "task.env.enableDebugVis=True",
+                // "task.env.terrain.curriculum=False",
+                // "task.env.learn.torqueRewardScale=-1e-5",
+                // "task.env.observationNames=[linearVelocity,angularVelocity,projectedGravity,commands,dofPosition,dofVelocity,heightMap,actions,contact]",
+                // "sim_device='cuda:1'",
+                // "rl_device='cuda:1'",
+                "task.env.numEnvs=32",
+                "task.env.terrain.numLevels=3",
+                "task.env.terrain.numTerrains=3",
+                "train.params.config.horizon_length=24",
+                "train.params.config.minibatch_size=768",
+                // "task.env.randomCommandVelocityRanges.linear_x=[0.9,1]",
+                // "task.env.randomCommandVelocityRanges.linear_y=[0.,0]",
+                // "task.env.randomCommandVelocityRanges.yaw=[-0.2,0.2]",
+                
+                // "task.env.learn.feetAirTimeMin_s=0.3",
+                // "task.env.learn.feetStanceTimeMin_s=0.3",
+                // "+task.env.learn.baseHeightRewardParams=[0.02,3]",
+
+                // "task.env.learn.dofLimitMargins=0.1",
+                // "task.env.learn.dofLimitScale=-1.0",
+                // "task.env.baseHeightTarget=0.3",
+                // "task.env.learn.baseHeightRewardScale=-0.5",
+                // "task.env.learn.pushInterval_s=5",
+                // "task.env.learn.orientationRewardScale=-0.5",
+                // "task.env.learn.feetStumbleRewardScale=-1.0",
+                // "task.env.learn.hipRewardScale=-0.1",
+                // "task.env.learn.feetAirTimeRewardScale=0.0",
+                // "task.env.learn.jointAccRewardScale=-0.002",
+                // "task.env.terrain.difficultySale=0.8" ,
+
+
+                "hydra.run.dir=../tmp/terrain",
+                // "+task.env.baseAsHeightmap=True",
+                // "checkpoint=../outputs/nn/last_A1Terrain_ep_8000_rew_19.83828.pth", //34@8000steps zeroheightmap
+                // "checkpoint=../outputs/nn/last_A1Terrain_ep_4000_rew_28.397326.pth", //31@4000steps
+            ]
+        }
+    ]
+}

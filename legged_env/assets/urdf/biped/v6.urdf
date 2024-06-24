@@ -1,0 +1,440 @@
+<?xml version="1.0" ?>
+<robot name="v6">
+
+<material name="silver">
+  <color rgba="0.700 0.700 0.700 1.000"/>
+</material>
+
+
+<link name="base_link">
+  <inertial>
+    <origin xyz="0.006 0 0.095" rpy="0 0 0"/>
+    <mass value="8.010643"/>
+    <inertia ixx="0.1635" iyy="0.1096" izz="0.08605" ixy="0" iyz="0" ixz="-0.004905"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 -0.016" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0.1665" rpy="0 0 0"/>
+    <geometry>
+       <box size="0.160 0.300 0.365"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="hip-L-1_1">
+  <inertial>
+    <origin xyz="-6.189197686711422e-18 0.081816 -0.073193" rpy="0 0 0"/>
+    <mass value="2.976066"/>
+    <inertia ixx="0.01329" iyy="0.006238" izz="0.01125" ixy="0" iyz="-0.003457" ixz="0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.0 -0.09 0.0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/hip-L-1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="0 0.114 -0.08" rpy="1.5707963 0 0"/>
+    <geometry>
+      <cylinder radius="0.0595" length="0.069"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="hip-L-2_1">
+  <inertial>
+    <origin xyz="0 -0.078238 -0.00696" rpy="0 0 0"/>
+    <mass value="1.962229"/>
+    <inertia ixx="0.003932" iyy="0.002264" izz="0.003152" ixy="0" iyz="0" ixz="0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.0 -0.1695 0.08" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/hip-L-2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <!-- <collision>
+    <origin xyz="0 -0.0795 0" rpy=" 0 1.5707 0"/>
+    <geometry>
+      <cylinder radius="0.0565" length="0.061"/>
+    </geometry>
+  </collision> -->
+</link>
+
+<link name="thigh-L_1">
+  <inertial>
+    <origin xyz="-0.032881 -0.019651 -0.188957" rpy="0 0 0"/>
+    <mass value="3.965636"/>
+    <inertia ixx="0.03332" iyy="0.03585" izz="0.00632" ixy="0" iyz="0.001235" ixz="0.004203"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.0305 -0.09 0.08" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/thigh-L_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="-0.031 -0.02 -0.205" rpy="0 0 0"/>
+    <geometry>
+      <box size="0.12 0.08 0.27"/>
+    </geometry>
+  </collision>
+</link>
+
+
+<link name="shank-L_1">
+  <inertial>
+    <origin xyz="0.020174 -0.011965 -0.118449" rpy="0 0 0"/>
+    <mass value="0.817887"/>
+    <inertia ixx="0.005919" iyy="0.006802" izz="0.0009646" ixy="0.0" iyz="0" ixz="-0.0007655"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.0005 -0.1025 0.36" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/shank-L_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <!-- <collision>
+    <origin xyz="0.0005 -0.1025 0.36" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/shank-L_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision> -->
+</link>
+
+<link name="foot-L_1">
+  <inertial>
+    <origin xyz="0.04057 0 -0.028042" rpy="0 0 0"/>
+    <mass value="0.243354"/>
+    <inertia ixx="0.0001416" iyy="0.0005063" izz="0.0004175" ixy="0.0" iyz="0" ixz="-0.0001864"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.0005 -0.09 0.5845" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/foot-L_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="0.0455 0 -0.034" rpy="0 0 0"/>
+    <geometry>
+      <box size="0.163 0.04 0.022"/>
+    </geometry>
+  </collision>
+</link>
+
+
+
+<link name="hip-R-1_1">
+  <inertial>
+    <origin xyz="-6.189197686711422e-18 -0.081816 -0.073193" rpy="0 0 0"/>
+    <mass value="2.976066"/>
+    <inertia ixx="0.01329" iyy="0.006238" izz="0.01125" ixy="0" iyz="0.003457" ixz="0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.0 0.09 -0.0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/hip-R-1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="0 -0.114 -0.08" rpy="1.5707963 0 0"/>
+    <geometry>
+      <cylinder radius="0.0595" length="0.069"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="hip-R-2_1">
+  <inertial>
+    <origin xyz="0 0.078238 -0.00696" rpy="0 0 0"/>
+    <mass value="1.962229"/>
+    <inertia ixx="0.003932" iyy="0.002264" izz="0.003152" ixy="0" iyz="0" ixz="0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.0 0.1695 0.08" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/hip-R-2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <!-- <collision>
+    <origin xyz="0 0.0795 0" rpy=" 0 1.5707 0"/>
+    <geometry>
+      <cylinder radius="0.0565" length="0.061"/>
+    </geometry>
+  </collision> -->
+</link>
+
+<link name="thigh-R_1">
+  <inertial>
+    <origin xyz="-0.032881 0.019651 -0.188957" rpy="0 0 0"/>
+    <mass value="3.965636"/>
+    <inertia ixx="0.03332" iyy="0.03585" izz="0.00632" ixy="0" iyz="-0.001235" ixz="0.004203"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.0305 0.09 0.08" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/thigh-R_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="-0.031 0.02 -0.205" rpy="0 0 0"/>
+    <geometry>
+      <box size="0.12 0.08 0.27"/>
+    </geometry>
+  </collision>
+</link>
+
+
+
+<link name="shank-R_1">
+  <inertial>
+    <origin xyz="0.020174 0.011965 -0.118449" rpy="0 0 0"/>
+    <mass value="0.817887"/>
+    <inertia ixx="0.005919" iyy="0.006802" izz="0.0009646" ixy="0.0" iyz="0" ixz="-0.0007655"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.0005 0.1025 0.36" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/shank-R_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <!-- <collision>
+    <origin xyz="0.0005 0.1025 0.36" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/shank-R_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision> -->
+</link>
+
+
+<link name="foot-R_1">
+  <inertial>
+    <origin xyz="0.04057 0 -0.028042" rpy="0 0 0"/>
+    <mass value="0.243354"/>
+    <inertia ixx="0.0001416" iyy="0.0005063" izz="0.0004175" ixy="0.0" iyz="0" ixz="-0.0001864"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.0005 0.09 0.5845" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/foot-R_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin xyz="0.0455 0 -0.034" rpy="0 0 0"/>
+    <geometry>
+      <box size="0.163 0.04 0.022"/>
+    </geometry>
+  </collision>
+</link>
+
+
+
+<joint name="l-hip-0" type="revolute">
+  <origin xyz="0.0 0.09 -0.016" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="hip-L-1_1"/>
+  <axis xyz="-0.0 0.0 -1.0"/>
+  <limit upper="0.523599" lower="-1.047198" effort="81" velocity="13.333"/>
+</joint>
+<transmission name="l-hip-0_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="l-hip-0">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="l-hip-0_actr">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<joint name="l-hip-1" type="revolute">
+  <origin xyz="0.0 0.0795 -0.08" rpy="0 0 0"/>
+  <parent link="hip-L-1_1"/>
+  <child link="hip-L-2_1"/>
+  <axis xyz="-0.0 -1.0 0.0"/>
+  <limit upper="1.570796" lower="-0.523599" effort="90" velocity="12"/>
+</joint>
+<transmission name="l-hip-1_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="l-hip-1">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="l-hip-1_actr">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<joint name="l-hip-2" type="revolute">
+  <origin xyz="0.0305 -0.0795 0.0" rpy="0 0 0"/>
+  <parent link="hip-L-2_1"/>
+  <child link="thigh-L_1"/>
+  <axis xyz="1.0 -0.0 -0.0"/>
+  <limit upper="0.628319" lower="-0.349066" effort="81" velocity="13.333"/>
+</joint>
+<transmission name="l-hip-2_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="l-hip-2">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="l-hip-2_actr">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<joint name="l-shank-3" type="revolute">
+  <origin xyz="-0.031 0.0125 -0.28" rpy="0 0 0"/>
+  <parent link="thigh-L_1"/>
+  <child link="shank-L_1"/>
+  <axis xyz="0.0 1.0 -0.0"/>
+  <limit upper="1.570796" lower="0.0" effort="81" velocity="13.333"/>
+</joint>
+<transmission name="l-shank-3_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="l-shank-3">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="l-shank-3_actr">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<joint name="l-foot-4" type="revolute">
+  <origin xyz="0.0 -0.0125 -0.2245" rpy="0 0 0"/>
+  <parent link="shank-L_1"/>
+  <child link="foot-L_1"/>
+  <axis xyz="-0.0 1.0 0.0"/>
+  <limit upper="0.802851" lower="-0.628319" effort="45" velocity="10.667"/>
+</joint>
+<transmission name="l-foot-4_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="l-foot-4">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="l-foot-4_actr">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<joint name="r-hip-0" type="revolute">
+  <origin xyz="0.0 -0.09 -0.016" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="hip-R-1_1"/>
+  <axis xyz="-0.0 0.0 -1.0"/>
+  <limit upper="1.047198" lower="-0.523599" effort="81" velocity="13.333"/>
+</joint>
+<transmission name="r-hip-0_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="r-hip-0">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="r-hip-0_actr">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<joint name="r-hip-1" type="revolute">
+  <origin xyz="0.0 -0.0795 -0.08" rpy="0 0 0"/>
+  <parent link="hip-R-1_1"/>
+  <child link="hip-R-2_1"/>
+  <axis xyz="0.0 1.0 -0.0"/>
+  <limit upper="0.523599" lower="-1.570796" effort="90" velocity="12"/>
+</joint>
+<transmission name="r-hip-1_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="r-hip-1">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="r-hip-1_actr">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<joint name="r-hip-2" type="revolute">
+  <origin xyz="0.0305 0.0795 0.0" rpy="0 0 0"/>
+  <parent link="hip-R-2_1"/>
+  <child link="thigh-R_1"/>
+  <axis xyz="1.0 -0.0 -0.0"/>
+  <limit upper="0.349066" lower="-0.628319" effort="81" velocity="13.333"/>
+</joint>
+<transmission name="r-hip-2_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="r-hip-2">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="r-hip-2_actr">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<joint name="r-shank-3" type="revolute">
+  <origin xyz="-0.031 -0.0125 -0.28" rpy="0 0 0"/>
+  <parent link="thigh-R_1"/>
+  <child link="shank-R_1"/>
+  <axis xyz="-0.0 -1.0 0.0"/>
+  <limit upper="0.0" lower="-1.570796" effort="81" velocity="13.333"/>
+</joint>
+<transmission name="r-shank-3_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="r-shank-3">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="r-shank-3_actr">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+
+<joint name="r-foot-4" type="revolute">
+  <origin xyz="0.0 0.0125 -0.2245" rpy="0 0 0"/>
+  <parent link="shank-R_1"/>
+  <child link="foot-R_1"/>
+  <axis xyz="0.0 -1.0 0.0"/>
+  <limit upper="0.628319" lower="-0.628319" effort="45" velocity="10.667"/>
+</joint>
+<transmission name="r-foot-4_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="r-foot-4">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="r-foot-4_actr">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+</robot>

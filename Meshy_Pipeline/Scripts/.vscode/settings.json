@@ -1,0 +1,5 @@
+{
+    "python.analysis.extraPaths": [
+        "./install_numpy/install_"
+    ]
+}

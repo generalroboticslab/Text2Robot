@@ -1,0 +1,4 @@
+DELETE THIS LINE: DUPLICATE THIS FILE to 'api_key.txt' for API integration
+DELETE THIS LINE: This file should contain one string, the API key
+DELETE THIS LINE: Access the key from the project notion page, or by contacting zachary.charlick@duke.edu
+No quotes!

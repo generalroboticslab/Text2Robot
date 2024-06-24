@@ -1,0 +1,10 @@
+{
+	"autodeskProduct":	"Fusion360",
+	"type":	"script",
+	"author":	"",
+	"description":	{
+		"":	"installs numpy and scipy for use in fusion360 scripts"
+	},
+	"supportedOS":	"windows|mac",
+	"editEnabled":	true
+}
