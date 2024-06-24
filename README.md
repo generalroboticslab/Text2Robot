@@ -42,12 +42,16 @@ Uncommenting the URDF exporter function in wrapper will export the generated rob
 
 ![URDFExporter](https://github.com/generalroboticslab/RobotsMakingRobots/assets/46581478/2199d1c2-33e8-4c08-9eb5-a24ddb90e0e1)
 
-
-
 ## Evolutionary loop
+
+To further evolve robots using our evolutionary algorithm, make a experiment directory similar to our provided example Evolutionary_Algorithm/Example_Experiment. This directory should contain a folder URDF_Bank, which will hold the entire gene pool. We recommend using at least 7 prompts, for a total of 210 robot models. If you have less, you will need to modify Evolutionary_Algorithm/init_population to initialize a smaller first generation. You can include as many robots as you would like!
+
+The under the Evolutionary_Algorithm/experiments folder, duplicate and rename Example_Experiment.py. Change the robot_names array to include the names of each prompt in the bank. Ensure the naming convention for your robots is correct. For example, if you have a bank of just one prompt 'Frog' (with 30 total models), each of the 30 models  should follow the naming convention: Frog_Frog_top-z-9_Frog_bottom-z-9.urdf with 'z' and '9' replaced by the three axis orientations [x, y, z], and all possible limb scales 0-9.
+
+After setting up the experiment, navigate to the Evolutionary_Algorithm folder, and run driver.py. driver.py can be updated to change the max generations of evolution, rough vs flat terrain, and if there should be an additional user specified preference of velocity tracking accuracy, or energy efficiency.
 
 ## Sim2Real
 
-For Sim2Real, download the Sim2Real_Reciever/reciever.py folder on to your robots RaspberryPi. You will also need to initilize the servo python control library found at: https://github.com/ethanlipson/PyLX-16A
+For Sim2Real, download the Sim2Real_Receiver/receiver.py folder on to your robots RaspberryPi. You will also need to initialize the servo python control library found at: https://github.com/ethanlipson/PyLX-16A
 
-Running the reciever.py python script will listen for the UDP message packs that are transmitted when a robot is being played in simulation. You will need to match the target_url of the data receiver and data publisher. The data publisher url can be modified using a command line override to issacgym "task.env.dataPublisher.target_url".
+Running the receiver.py python script will listen for the UDP message packs that are transmitted when a robot is being played in simulation. You will need to match the target_url of the data receiver and data publisher. The data publisher url can be modified using a command line override to issacgym "task.env.dataPublisher.target_url". To directly visualize a robot in isaacgym and send the data to sim2real, navigate to the legged_env folder. use the bash script 'bash run.sh NAME -pk' to playback a checkpoint with keyboard controls enabled. Create a new profile in run.sh with NAME, or modify one of our existing ones to reference the urdf and checkpoint file of the robot you wish to visualize. use (ijkl) as arrow keys to direct the robot velocity and (u and o) to control yaw.
