@@ -1,9 +1,0 @@
-leg_0:1
-leg_1:1
-leg_2:1
-leg_3:1
-base_link:1
-foot_0:1
-foot_1:1
-foot_2:1
-foot_3:1

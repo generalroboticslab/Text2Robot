@@ -26,6 +26,10 @@ To slice the brepbody, add the wrapper script and installNumpy script to fusion3
 
 ![AddScripts](https://github.com/generalroboticslab/RobotsMakingRobots/assets/46581478/761fe4d8-8e56-4d94-aae2-a468c2e5c465)
 
+Prior to running the Wrapper script, add "Polyethylene Low Density" material to favorites by navigating to the fusion material library plastics folder, right clicking on polyethylene low density, and adding to favorites. 
+
+![AddMaterial](https://github.com/generalroboticslab/RobotsMakingRobots/assets/46581478/abde0655-7a6f-4fc9-a84d-02c716c1f1b0)
+
 
 Run installNumpy to install necessary python libraries to the same file path as the wrapper script. Running the wrapper script will convert the preprocessed brepbody to a robot assembly. If the mesh does not properly slice, adjusting the steps in the slicebyDX function of slicebody can adjust the location of shoulder slices.
 
