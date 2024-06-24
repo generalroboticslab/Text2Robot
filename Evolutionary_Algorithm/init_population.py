@@ -36,7 +36,7 @@ def init(experiment_name, robot_names, bank_size, offspring_path):
     init_population = []
     axis_choices = ['x','y','z']
 
-    while len(init_population) < 200:
+    while len(init_population) < 200: # Change from 200 to alter the size of the initial population, will infinitely loop if less than 200 robots in URDF_Bank
 
         scale = random.randint(0, bank_size/3 - 1)
 

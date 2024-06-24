@@ -7,23 +7,21 @@ import numpy as np
 import select
 import threading
 import subprocess
-from math import sin, cos
 from pylx16a.lx16a import *
 import time
 import numpy as np
-LX16A.initialize("/dev/ttyUSB0", 0.1)
+LX16A.initialize("/dev/ttyUSB0", 0.1) # Change port based on which port is connected to the servo controller
 
-# joint_idx = 2
 try:
-    servo0 = LX16A(0)
-    servo1 = LX16A(1)
-    servo2 = LX16A(2)
-    servo3 = LX16A(3)
-    servo4 = LX16A(4)
-    servo5 = LX16A(5)
-    servo6 = LX16A(6)
+    servo0 = LX16A(0)  # Ensure that real servos match isaacgym indecies, or realign here
+    servo1 = LX16A(4)
+    servo2 = LX16A(1)
+    servo3 = LX16A(5)
+    servo4 = LX16A(2)
+    servo5 = LX16A(6)
+    servo6 = LX16A(3)
     servo7 = LX16A(7)
-    servo0.set_angle_limits(0, 240)
+    servo0.set_angle_limits(0, 240)  # Set safe limits for servos
     servo1.set_angle_limits(0, 240)
     servo2.set_angle_limits(0, 240)
     servo3.set_angle_limits(0, 240)
@@ -159,7 +157,7 @@ class DataReceiver:
         self.get_server_public_ip()
         input('input to start')
 
-    def receive(self, timeout=0.1, buffer_size=1024):
+    def receive(self, timeout=0.1, buffer_size=2048):
         """Receive and decode data from the socket if available, otherwise return None."""
         ready = select.select([self.socket], [], [], timeout)
         if ready[0]:
@@ -170,7 +168,7 @@ class DataReceiver:
         else:
             return None, None  # No data received within the timeout
 
-    def receive_continuously(self,timeout=0.1, buffer_size=1024):
+    def receive_continuously(self,timeout=0.1, buffer_size=2048):
         """Continuously receive and decode data from the socket in a dedicated thread."""
 
         def _receive_loop():
@@ -235,7 +233,6 @@ def convert_to_python_builtin_types(nested_data: dict):
             converted_data[key] = value
     return converted_data
 
-
 if __name__=="__main__":
     import time
 
@@ -253,27 +250,50 @@ if __name__=="__main__":
 
     # Start continuous receiving in a thread
     receiver.receive_continuously()
-    speed = 100
+    init_speed = 200
+    speed = 15
     i = 0
+
+    # Gain should be adjusted to match simulation performance
+    shoulder_gain = 1.5
+
+    # Home the shoulders
+    servo0.move(120,init_speed)
+    servo1.move(120,init_speed)
+    servo2.move(120, init_speed)
+    servo3.move(120,init_speed)
+    servo4.move(120,init_speed)
+    servo5.move(120,init_speed)
+    servo6.move(120,init_speed)
+    servo7.move(120,init_speed)
+
+    input()
+
     while True:
-        print(f"Received from {receiver.address}: {receiver.data}")
+        # print(f"Received from {receiver.address}: {receiver.data}")
+
         if i == 0:
             time.sleep(1)
-            i+=1
-        # id = receiver.data['servo_id']
-        angle = receiver.data['position']
-        servo0.move(angle[0],speed)
-        servo1.move(angle[1],speed)
-        servo2.move(angle[2],speed)
-        servo3.move(angle[3],speed)
-        servo4.move(angle[4],speed)
-        servo5.move(angle[5],speed)
-        servo6.move(angle[6],speed)
-        servo7.move(angle[7],speed)
-        time.sleep(0.1)
-        # step += 1
+            i = i + 1
 
-    # Stop continuous receiving after a while
-    receiver.stop()
+        angle = receiver.data['dof_pos']
+        print(receiver.data)
+        if angle is not None:
+            
+            angle_0 = shoulder_gain * np.degrees(angle[0]) + 120 # pos
+            angle_1 = np.degrees(angle[1]) + 120 # pos
+            angle_2 = shoulder_gain * np.degrees(angle[2]) + 120 # pos
+            angle_3 = np.degrees(-1 * angle[3]) + 120
+            angle_4 = shoulder_gain * np.degrees(-1 * angle[4]) + 120
+            angle_5 = np.degrees(angle[5]) + 120 # pos
+            angle_6 = shoulder_gain * np.degrees(-1 * angle[6]) + 120
+            angle_7 = np.degrees(-1 * angle[7]) + 120
 
-    print("Publisher and Receiver have stopped.")
+            servo0.move(angle_0, speed)
+            servo1.move(angle_1, speed)
+            servo2.move(angle_2, speed)
+            servo3.move(angle_3, speed)
+            servo4.move(angle_4, speed)
+            servo5.move(angle_5, speed)
+            servo6.move(angle_6, speed)
+            servo7.move(angle_7, speed)

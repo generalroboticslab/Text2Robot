@@ -22,7 +22,7 @@ STL meshes can be converted to a fusion360 assembly using the provided sliceBody
 ![InsertMesh](https://github.com/generalroboticslab/RobotsMakingRobots/assets/46581478/6260c319-2e28-4328-9282-bf41ddf6e99f)
 ![ConvertMesh](https://github.com/generalroboticslab/RobotsMakingRobots/assets/46581478/752ee300-753c-41fc-bc06-1f0e3ca92f7b)
 
-To slice the brepbody, add the wrapper script and installNumpy script to fusion360 scripts and add ins. Click on the green plus, and navigate to RobotsMakingRobots/MeshyPipeline/Scripts/ and click the wrapper or installNumpy folder.
+To slice the brepbody, add both python scripts in the 'Fusion360_Scripts' folder into Fusion360. To link an add-in in Fusion360, click on the green plus, and navigate to and select the Wrapper and Install_Packages folders.
 
 ![AddScripts](https://github.com/generalroboticslab/RobotsMakingRobots/assets/46581478/761fe4d8-8e56-4d94-aae2-a468c2e5c465)
 
@@ -31,7 +31,7 @@ Prior to running the Wrapper script, add "Polyethylene Low Density" material to 
 ![AddMaterial](https://github.com/generalroboticslab/RobotsMakingRobots/assets/46581478/abde0655-7a6f-4fc9-a84d-02c716c1f1b0)
 
 
-Run installNumpy to install necessary python libraries to the same file path as the wrapper script. Running the wrapper script will convert the preprocessed brepbody to a robot assembly. If the mesh does not properly slice, adjusting the steps in the slicebyDX function of slicebody can adjust the location of shoulder slices.
+Run Install_Packages to install necessary python libraries to the same file path as the wrapper script. Running the Wrapper script will convert the preprocessed brepbody to a robot assembly. If the mesh does not properly slice, adjusting the steps in the slicebyDX function of slicebody can adjust the location of shoulder slices.
 
 ![AdjustSteps](https://github.com/generalroboticslab/RobotsMakingRobots/assets/46581478/22e2407d-51d0-4c4e-9bb2-3220d6cb2993)
 
@@ -45,3 +45,9 @@ Uncommenting the URDF exporter function in wrapper will export the generated rob
 
 
 ## Evolutionary loop
+
+## Sim2Real
+
+For Sim2Real, download the Sim2Real_Reciever/reciever.py folder on to your robots RaspberryPi. You will also need to initilize the servo python control library found at: https://github.com/ethanlipson/PyLX-16A
+
+Running the reciever.py python script will listen for the UDP message packs that are transmitted when a robot is being played in simulation. You will need to match the target_url of the data receiver and data publisher. The data publisher url can be modified using a command line override to issacgym "task.env.dataPublisher.target_url".

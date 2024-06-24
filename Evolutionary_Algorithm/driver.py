@@ -17,69 +17,36 @@ import pickle
 import argparse
 import yourdfpy
 
-debug_mode = False # Setting debug mode to true generates fake rewards
+max_generations = 55 # Customize how many evolutionary generations you want to run
 
-parser = argparse.ArgumentParser(description="Driver script to evolve a robot morphology and walking policy.")
-
-# Add arguments
-parser.add_argument("experiment_name", type=str, help="which experiments you want to run (Experiment_1, Experiment_2, or Experiment_3)")
-parser.add_argument("max_generations", type=int, help="How many generations do you want to evolve to (ex. 30)")
-
-args = parser.parse_args()
-
-# Access the arguments
-print(f"Experiment Name: {args.experiment_name}")
-print(f"Generations: {args.max_generations}")
-
-max_generations = args.max_generations
-
-if not (max_generations > 0 and max_generations < 1000000):
-    print("Please call the driver as follows: python driver.py Experiment_X max_generations")
-    exit()
-
-inform_based_on_energy = False
+inform_based_on_energy = False # You can set one of these options to true to evolve for a particular preference
 inform_based_on_velocity = False
 
-if args.experiment_name == 'Experiment_1':
-    from evolutionary_loop.experiments.Experiment_1 import *
-    inform_based_on_energy = False
-    inform_based_on_velocity = True
-elif args.experiment_name == 'Experiment_2':
-    from evolutionary_loop.experiments.Experiment_2 import * 
-elif args.experiment_name == 'Experiment_3':
-    from evolutionary_loop.experiments.Experiment_3 import *
-    inform_based_on_energy = False
-    inform_based_on_velocity = True
-else:
-    print("Please call the driver as follows: python driver.py Experiment_X max_generations")
-    exit()
+rough_terrain = False # Set to true to test robots on rough terrain (longer training time)
+
+from Evolutionary_Algorithm.experiments.Example_Experiment import * # Change this to the experiment preferences file corresponding to your experiment
 
 gen = 0
 
-bank_size = 30 # assume equal num of each joint type
+bank_size = 30 # 30 robots generated per mesh (You can include as many meshes (30 * prompts = # of models), but it should be divisible by 30)
 
 
 timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+offspring_folder_path = os.path.join(experiment_name, "Offspring_" + timestamp) # Experiment results are stored here
 
-offspring_folder_path = os.path.join(experiment_name, "Offspring_" + timestamp)
-
-# Create a logs directory if it doesn't exist
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
-# Define the log directory relative to the script location
+# Create a logging file
 log_directory = os.path.join(offspring_folder_path, 'log_files')
-
 os.makedirs(log_directory, exist_ok=True)
-
-# Timestamp for the log file name
 log_filename = f"{log_directory}/log_{timestamp}.txt"
-
 # Set up logging
 logging.basicConfig(filename=log_filename, level=logging.INFO, filemode='a', format='%(message)s')
 logging.info("Initialized log file at: " + str(timestamp))
 
-init(experiment_name, robot_names, bank_size, offspring_folder_path) # Initialize 6 offspring (right now 2 from each joint type)
- 
+init(experiment_name, robot_names, bank_size, offspring_folder_path) # Init 200 robots from the URDF_Bank to be the first generation
+
+# Robots are pickled according to this file, and any of the information can be retroactively retrieved.
 @dataclasses.dataclass
 class Offspring():
     model_dir: str = None
@@ -96,19 +63,15 @@ class Offspring():
 robots = dict()
 archive = dict()
 
-launcher = Launcher(max_parallel=2,num_gpus=1,experiments_per_gpu=2,train_dir="./output/", pause_between=0)
-launcher = Launcher(max_parallel=24,num_gpus=6,experiments_per_gpu=4,train_dir="./output/", pause_between=0)
-
-# ONLY SET TO True when debugging pre-trained bots
-# pretrained = True
-pretrained = False
+# Increase experiments_per_gpu and max_parallel if you have more than one GPU for training
+launcher = Launcher(max_parallel=4,num_gpus=1,experiments_per_gpu=4,train_dir="./output/", pause_between=0)
 
 for model_dir in pathlib.Path(offspring_folder_path).iterdir():
     if model_dir.is_dir() and model_dir.name != 'log_files':
         robot_name= os.path.basename(model_dir)
         robot = Offspring(model_dir=model_dir)
         robot.run_dir= os.path.abspath(os.path.join(model_dir,'run'))
-        robot.cmd=get_subdirectory_configs(model_dir,extra_configs)
+        robot.cmd=get_subdirectory_configs(model_dir,extra_configs, False, rough_terrain)
         robot.cmd["hydra.run.dir"]= robot.run_dir
         robot.generation = gen
         robot.evaluated = False
@@ -135,21 +98,14 @@ while(gen < max_generations + 1): # Continue evolving until termination criteria
                 )
             )
 
-    if not debug_mode:
-        launcher.add(experiments)
-        launcher.run() 
+    launcher.add(experiments)
+    launcher.run() 
 
     for robot in robots.values():
         if robot.evaluated is False:
-            # path_to_nn = find_nn_path(robot.run_dir)
-            # reward, checkpoint_file = find_greatest_reward(path_to_nn)
-            if debug_mode:
-                # Debugging used to generate random rewards instead of training
-                reward = gen + random.randint(1,5)
-                checkpoint_file = 'test'
-            else:
-                path_to_nn = find_nn_path(robot.run_dir)
-                reward, checkpoint_file = find_greatest_reward(path_to_nn)
+
+            path_to_nn = find_nn_path(robot.run_dir)
+            reward, checkpoint_file = find_greatest_reward(path_to_nn)
 
             # Collect and record the individual reward contributions
             reward_contributions = extract_velocity_and_energy_reward(robot.model_dir)
@@ -157,7 +113,7 @@ while(gen < max_generations + 1): # Continue evolving until termination criteria
             robot.velocity_contribution = 20 * reward_contributions[0]
             robot.power_contribution = -10 * reward_contributions[1]
 
-            if inform_based_on_energy and (not reward == -10000000): 
+            if inform_based_on_energy and (not reward == -10000000): # If evolving with energy or velocity preference, adjust total reward
                 reward = reward + robot.power_contribution
             if inform_based_on_velocity and (not reward == -10000000):
                 reward = reward + robot.velocity_contribution

@@ -6,6 +6,7 @@ import numpy as np
 from util import *
 import re
 
+# Used for genetic operators to swap and modify URDFs
 class swap_legs_from_urdf(object):
     def __init__(self, robot_1, robot_2, dest_path, isMutate):
         self.dest_path = dest_path

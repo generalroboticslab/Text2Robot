@@ -1,8 +1,9 @@
 import os
 
+# Find the checkpoint file with the greatest reward. Return the filename and the reward.
+
 # Parameters
 # folder_path: The path to the folder created by the training
-# right now this is under outputs/TaskName/False/Date  (False for training)
 
 def find_greatest_reward(folder_path):
     # print("Checkpoint target: " + str(folder_path))
@@ -23,9 +24,4 @@ def find_greatest_reward(folder_path):
         print("Subfolder 'nn' does not exist: " + folder_path)
 
     return max_reward, max_file
-
-
-# reward, file = find_greatest_reward("/home/grl/Documents/legged/outputs/RobotDog/False/2024-05-07_09-44-27/runs/RobotDog_07-09-44-28/nn")
-
-# print(f"Max reward: {reward} from file: {file}")
 
