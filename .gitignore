@@ -61,20 +61,3 @@ share/python-wheels/
 .installed.cfg
 *.egg
 MANIFEST
-
-# outputs
-outputs
-
-# Experiment Results
-#Experiment results
-evolutionary_loop/Experiment_1
-#Experiment results
-evolutionary_loop/Experiment_2
-#Experiment results
-evolutionary_loop/Experiment_3
-#Experiment results
-evolutionary_loop/Experiment_4
-#Experiment results
-evolutionary_loop/Experiment_5
-
-evolutionary_loop/URDF_Bank/
