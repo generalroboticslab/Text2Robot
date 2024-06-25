@@ -1,7 +1,7 @@
 # Text2Robot
 
 Ryan Ringel,
-[Zach Charlick](https://zacharycharlick.com),
+[Zachary Charlick](https://zacharycharlick.com),
 Jiaxun Liu,
 Boxi Xia,
 [Boyuan Chen](http://boyuanchen.com/)
@@ -14,7 +14,31 @@ Duke University
 ## Overview
 This repo contains the Fusion360 and Python implementation for paper "Text2Robot." Our pipeline automatically converts a text prompt to a quadrupedal robot. We utilize a state of the art text to mesh generative model as initialization for our pipeline, and convert the static mesh to a kinetic robot model. We evolve the robots control and morphology simultaneously using our evolutionary algorithm.
 
-![teaser](figures/teaser.gif)
+<p align="center">
+    <img src="figures/teaser.gif" alt="teaser" style="width:50%;">
+</p>
+
+## Citation
+
+If you find our paper or codebase helpful, please consider citing:
+
+```
+@article{standincitation,
+  title={Text2Robot},
+  author={Ringel, Ryan and Charlick, Zachary and Liu, Jiaxun and Xia, Boxi and Chen, Boyuan},
+  journal={arXiv preprint arXiv:STANDIN},
+  year={2024}
+}
+```
+
+## Content
+
+- [Installation](#installation)
+- [Text2Mesh](#text2mesh)
+- [Mesh2CAD](#mesh2cad)
+- [CAD2URDF](#cad2urdf)
+- [Evolutionary Loop](#evolutionary-loop)
+- [Sim2Real](#sim2real)
 
 ## Project Structure
 ```
@@ -50,18 +74,35 @@ This repo contains the Fusion360 and Python implementation for paper "Text2Robot
     ├── Electronics_Modules
     └── Example_Meshes
 ```
+## Installation
+
+The installation has been tested on Ubuntu 22.04.4 LTS with CUDA 12.3. The experiments are performed on several different servers with either PNY RTX A6000, NVIDIA GeForce RTX 3090, or NVIDIA A100 PCIe GPUs.
+
+The conda yaml file `conda_env_py38.yaml` can be found in the base folder of the repo
+
+```bash
+alias conda="micromamba"
+
+# Create environment
+conda env create --file conda_env_py38.yaml -y
+
+# Activate the environment
+conda activate py38
+
+# Export library path
+export LD_LIBRARY_PATH=${CONDA_PREFIX}/lib
+```
+
+For Fusion360 geometric slicing installation, see section [Mesh2CAD](#mesh2cad)
 
 ## Text2Mesh
-We use the Meshy website https://www.meshy.ai/ to generate STL meshes from text prompts. STL's used in our experiments are provided in RobotMakingRobots/MeshyPipeline/Meshystl's. 
+We use the Meshy website https://www.meshy.ai/ to generate STL meshes from text prompts. STL's used in our experiments are provided in `STL_Files/Example_Meshes`. 
 
 ![MeshyHomeScreen](https://github.com/generalroboticslab/RobotsMakingRobots/assets/46581478/0fa40918-f86d-4850-900c-a0971a081f2c)
-
-
 
 Additional meshes can be generated using Meshy, although they are not guaranteed to work with the provided slicing script. Include the keywords "quadrupedal walking robot" in the text prompt for best results.
 
 ![MeshyText](https://github.com/generalroboticslab/RobotsMakingRobots/assets/46581478/72d1d86f-b40e-47d9-823a-877393302f4b)
-
 
 ## Mesh2CAD
 
@@ -78,7 +119,6 @@ Prior to running the Wrapper script, add "Polyethylene Low Density" material to 
 
 ![AddMaterial](https://github.com/generalroboticslab/RobotsMakingRobots/assets/46581478/abde0655-7a6f-4fc9-a84d-02c716c1f1b0)
 
-
 Run Install_Packages to install necessary python libraries to the same file path as the wrapper script. Running the Wrapper script will convert the preprocessed brepbody to a robot assembly. If the mesh does not properly slice, adjusting the steps in the slicebyDX function of slicebody can adjust the location of shoulder slices.
 
 ![AdjustSteps](https://github.com/generalroboticslab/RobotsMakingRobots/assets/46581478/22e2407d-51d0-4c4e-9bb2-3220d6cb2993)
@@ -91,21 +131,6 @@ Uncommenting the URDF exporter function in wrapper will export the generated rob
 ![URDFExporter](https://github.com/generalroboticslab/RobotsMakingRobots/assets/46581478/2199d1c2-33e8-4c08-9eb5-a24ddb90e0e1)
 
 ## Evolutionary Loop
-
-To run our Isaacgym code, you will need to download and activate our conda virtual environment found in the root folder of the git repository: `conda_env_py38.yaml`. Everything is done in Ubuntu.
-
-```bash
-alias conda="micromamba"
-
-# Create environment
-conda env create --file conda_env_py38.yaml -y
-
-# Activate the environment
-conda activate py38
-
-# Export library path
-export LD_LIBRARY_PATH=${CONDA_PREFIX}/lib
-```
 
 To further evolve robots using our evolutionary algorithm, create an experiment directory similar to our provided example: `Evolutionary_Algorithm/Example_Experiment`. If you wish to make custom changes to the training parameters, you can create a configuration file for the experiment in the `Evolutionary_Algorithm/experiments` directory, modeling it after our example. This directory should contain a folder `URDF_Bank`, which will hold the entire gene pool. We recommend using at least 5 prompts for a total of 150 robot models. If you have fewer, you will need to modify `Evolutionary_Algorithm/init_population` to initialize a smaller first generation. You can include as many robots as you would like!
 
