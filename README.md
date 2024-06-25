@@ -1,7 +1,41 @@
 # Text2Robot
-
 ## Overview
 Text2Robot automatically converts a text prompt to a quadrupedal robot. We utilize a state of the art text to mesh generative model as initialization for our pipeline, and convert the static mesh to a kinetic robot model. We evolve the robots control and morphology simultaneously using our evolutionary algorithm.
+
+## Project Structure
+```
+├── conda_env_py38.yaml                     # Conda enviornment for isaacgym
+├── Evolutionary_Algorithm
+│   ├── driver.py                           # Evolutionary algo driver
+│   ├── Example_Frog_Experiment             # Example Experiment URDF_Bank and directory
+│   ├── experiments                         # Customize command line overrides for your experiment
+│   ├── extract_rewards_from_tensorboard_file.py
+│   ├── gen_config_file.py
+│   ├── greatest_reward.py
+│   ├── init_population.py
+│   ├── __init__.py
+│   ├── output
+│   ├── __pycache__
+│   ├── swapping.py
+│   ├── train_util.py
+│   └── util.py
+├── Fusion360_Scripts                               
+│   ├── Install_Packages                   # Install necessary python packages for Fusion360
+│   └── Wrapper                            # Mesh to Robot Model(s) w/ geometric slicing
+├── __init__.py
+├── legged_env
+│   ├── assets
+│   ├── envs                               # Navigate here for visualization & sim2real
+│   ├── __init__.py
+│   ├── __pycache__
+│   └── README.md
+├── README.md
+├── Sim2Real                               # Sim2Real receiver for RaspPi
+│   └── receiver.py
+└── STL_Files                              # Example Text-to-mesh and modular components
+    ├── Electronics_Modules
+    └── Example_Meshes
+```
 
 ## Text2Mesh
 We use the Meshy website https://www.meshy.ai/ to generate STL meshes from text prompts. STL's used in our experiments are provided in RobotMakingRobots/MeshyPipeline/Meshystl's. 
