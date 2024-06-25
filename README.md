@@ -1,6 +1,20 @@
 # Text2Robot
+
+Ryan Ringel,
+[Zach Charlick](https://zacharycharlick.com),
+Jiaxun Liu,
+Boxi Xia,
+[Boyuan Chen](http://boyuanchen.com/)
+<br>
+Duke University
+<br>
+
+### [Project Website](http://www.generalroboticslab.com/blogs/blog/2024-06-22-crew/index.html) | [Video](https://youtu.be/KWHXchlJzSw) | [Paper](http://arxiv.org/abs/2112.10755)
+
 ## Overview
-Text2Robot automatically converts a text prompt to a quadrupedal robot. We utilize a state of the art text to mesh generative model as initialization for our pipeline, and convert the static mesh to a kinetic robot model. We evolve the robots control and morphology simultaneously using our evolutionary algorithm.
+This repo contains the Fusion360 and Python implementation for paper "Text2Robot." Our pipeline automatically converts a text prompt to a quadrupedal robot. We utilize a state of the art text to mesh generative model as initialization for our pipeline, and convert the static mesh to a kinetic robot model. We evolve the robots control and morphology simultaneously using our evolutionary algorithm.
+
+![teaser](figures/teaser.gif)
 
 ## Project Structure
 ```
