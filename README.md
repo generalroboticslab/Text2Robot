@@ -182,3 +182,7 @@ example(){
     )
 }
 ```
+
+## License
+
+This repository is released under the STAND IN license.  STAND IN
