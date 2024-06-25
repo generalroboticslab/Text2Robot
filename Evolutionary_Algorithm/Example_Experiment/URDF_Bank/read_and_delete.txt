@@ -1,1 +1,0 @@
-In this folder, upload all of the URDFs generated from the Fusion360 geometric slicing scripts

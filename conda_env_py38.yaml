@@ -1,0 +1,74 @@
+# to run:
+# $ conda env create --file conda_env_py38.yaml
+name: py38
+channels:
+  # - open3d-admin
+  - pytorch
+  - nvidia
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.8
+  # - absl-py
+  - debugpy
+  - austin # profiling  
+  - autopep8
+  - cmake
+  - threadpoolctl
+  - lit # dependency for IsaacGymEnvs, may not be necessary
+  # - box2d-py
+  - cython
+  - embree
+  - gym
+  - orjson
+  # - imageio
+  - joblib
+  - lxml
+  - graphviz
+  - matplotlib
+  - meshio
+  - msgpack-python
+  - networkx
+  - numba
+  - numpy
+  - pandas
+  - pip
+  - pipdeptree
+  # - point_cloud_utils
+  - pydot
+  # - pythonocc-core
+  - pytorch
+  - pytorch-cuda=11.8
+  - torchaudio
+  - torchvision
+  - termcolor
+  # - rtree=0.9.4
+  # - scikit-learn
+  - seaborn
+  - shapely
+  - tensorboard
+  - tensorboardx
+  - tqdm
+  # - trimesh
+  - jupyter
+  - jupyter_contrib_nbextensions
+  - line_profiler
+  # - opencv
+  - aiohttp
+  - onnxruntime
+  - onnx
+  - mlflow
+  - pytest
+  - black
+  - wandb
+  - pybullet
+  - hydra-core
+  - pip:
+    - ray
+    - open3d
+    # - gmsh
+    # - parametrize-from-file
+    # - casadi
+    # - inputs # pypi version
+    # - lcm  # pypi version
+    # - pyembree # on windows this has to be installed manually

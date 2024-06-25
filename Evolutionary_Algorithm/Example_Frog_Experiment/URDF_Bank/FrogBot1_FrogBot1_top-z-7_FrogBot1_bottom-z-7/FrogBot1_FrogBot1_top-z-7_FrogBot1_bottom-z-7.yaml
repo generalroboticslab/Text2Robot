@@ -1,0 +1,31 @@
+task:
+  env:
+    baseHeightTarget: 0.2404663444931658
+    baseInitState:
+      pos:
+      - 0
+      - 0
+      - 0.2404663444931658
+      rot:
+      - 0
+      - 0
+      - 0
+      - 1
+    defaultJointAngles:
+      joint_1_0: 0
+      joint_1_1: 0
+      joint_1_2: 0
+      joint_1_3: 0
+      joint_2_0: 0
+      joint_2_1: 0
+      joint_2_2: 0
+      joint_2_3: 0
+    desiredJointAngles:
+      joint_1_0: 0
+      joint_1_1: 0
+      joint_1_2: 0
+      joint_1_3: 0
+      joint_2_0: 0
+      joint_2_1: 0
+      joint_2_2: 0
+      joint_2_3: 0

@@ -24,7 +24,7 @@ inform_based_on_velocity = False
 
 rough_terrain = False # Set to true to test robots on rough terrain (longer training time)
 
-from Evolutionary_Algorithm.experiments.Example_Experiment import * # Change this to the experiment preferences file corresponding to your experiment
+from Evolutionary_Algorithm.experiments.Example_Frog_Experiment import * # Change this to the experiment preferences file corresponding to your experiment
 
 gen = 0
 
@@ -64,7 +64,7 @@ robots = dict()
 archive = dict()
 
 # Increase experiments_per_gpu and max_parallel if you have more than one GPU for training
-launcher = Launcher(max_parallel=4,num_gpus=1,experiments_per_gpu=4,train_dir="./output/", pause_between=0)
+launcher = Launcher(max_parallel=1,num_gpus=1,experiments_per_gpu=1,train_dir="./output/", pause_between=0)
 
 for model_dir in pathlib.Path(offspring_folder_path).iterdir():
     if model_dir.is_dir() and model_dir.name != 'log_files':

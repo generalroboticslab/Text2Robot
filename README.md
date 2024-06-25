@@ -42,16 +42,70 @@ Uncommenting the URDF exporter function in wrapper will export the generated rob
 
 ![URDFExporter](https://github.com/generalroboticslab/RobotsMakingRobots/assets/46581478/2199d1c2-33e8-4c08-9eb5-a24ddb90e0e1)
 
-## Evolutionary loop
+## Evolutionary Loop
 
-To further evolve robots using our evolutionary algorithm, make a experiment directory similar to our provided example Evolutionary_Algorithm/Example_Experiment. This directory should contain a folder URDF_Bank, which will hold the entire gene pool. We recommend using at least 7 prompts, for a total of 210 robot models. If you have less, you will need to modify Evolutionary_Algorithm/init_population to initialize a smaller first generation. You can include as many robots as you would like!
+To run our Isaacgym code, you will need to download and activate our conda virtual environment found in the root folder of the git repository: `conda_env_py38.yaml`. Everything is done in Ubuntu.
 
-The under the Evolutionary_Algorithm/experiments folder, duplicate and rename Example_Experiment.py. Change the robot_names array to include the names of each prompt in the bank. Ensure the naming convention for your robots is correct. For example, if you have a bank of just one prompt 'Frog' (with 30 total models), each of the 30 models  should follow the naming convention: Frog_Frog_top-z-9_Frog_bottom-z-9.urdf with 'z' and '9' replaced by the three axis orientations [x, y, z], and all possible limb scales 0-9.
+```bash
+alias conda="micromamba"
 
-After setting up the experiment, navigate to the Evolutionary_Algorithm folder, and run driver.py. driver.py can be updated to change the max generations of evolution, rough vs flat terrain, and if there should be an additional user specified preference of velocity tracking accuracy, or energy efficiency.
+# Create environment
+conda env create --file conda_env_py38.yaml -y
+
+# Activate the environment
+conda activate py38
+
+# Export library path
+export LD_LIBRARY_PATH=${CONDA_PREFIX}/lib
+```
+
+To further evolve robots using our evolutionary algorithm, create an experiment directory similar to our provided example: `Evolutionary_Algorithm/Example_Experiment`. If you wish to make custom changes to the training parameters, you can create a configuration file for the experiment in the `Evolutionary_Algorithm/experiments` directory, modeling it after our example. This directory should contain a folder `URDF_Bank`, which will hold the entire gene pool. We recommend using at least 5 prompts for a total of 150 robot models. If you have fewer, you will need to modify `Evolutionary_Algorithm/init_population` to initialize a smaller first generation. You can include as many robots as you would like!
+
+You can run `driver.py` out of the box to train our example Frog experiment! Or, to use your own models, under the `Evolutionary_Algorithm/experiments` folder, duplicate and rename `Example_Frog_Experiment.py`. Change the `robot_names` array to include the names of each prompt in the bank. Ensure the naming convention for your robots is correct. For example, if you have a bank of just one prompt 'Frog' (with 30 total models), each of the 30 models should follow the naming convention: `Frog_Frog_top-z-9_Frog_bottom-z-9.urdf` with 'z' and '9' replaced by the three axis orientations `[x, y, z]`, and all possible limb scales `0-9`.
+
+Lines 20-25 of `driver.py` can be edited to change the number of generations of evolution, as well as preferences for energy efficiency, velocity tracking accuracy, or performance on rough terrain.
+
+```bash
+max_generations = 55
+inform_based_on_energy = False
+inform_based_on_velocity = False
+rough_terrain = False
+```
+
+You will also need to adjust the GPU configuration settings on `driver.py` line `#67` to match your system properties.
+
+After setting up the experiment, navigate to the `Evolutionary_Algorithm` folder, and run `driver.py`. `driver.py` can be updated to change the max generations of evolution, rough vs flat terrain, and if there should be an additional user specified preference of velocity tracking accuracy, or energy efficiency.
+
+After running the experiment, you can visualize any of the evolved robots and their walking policies. Navigate to `legged_env/envs` and run:
+```bash
+bash run.sh example -pk
+```
+to visualize an example checkpoint of an evolved frog. To visualize your own bot, create a new entry in `exp.sh` modeled after `example`. Here you can specify the path to the robot urdf, and the path to the checkpoint file. -pk specifies playback mode, with keyboard input enabled. This will allow you to control the velocity of your robot using (ijkl) as arrow keys and (u and o) to control yaw (rotational velocity). For a full list of playback options, check out `run.sh`. If you run into unexpected errors, make sure you have the conda environment activated!
 
 ## Sim2Real
 
 For Sim2Real, download the Sim2Real_Receiver/receiver.py folder on to your robots RaspberryPi. You will also need to initialize the servo python control library found at: https://github.com/ethanlipson/PyLX-16A
 
-Running the receiver.py python script will listen for the UDP message packs that are transmitted when a robot is being played in simulation. You will need to match the target_url of the data receiver and data publisher. The data publisher url can be modified using a command line override to issacgym "task.env.dataPublisher.target_url". To directly visualize a robot in isaacgym and send the data to sim2real, navigate to the legged_env folder. use the bash script 'bash run.sh NAME -pk' to playback a checkpoint with keyboard controls enabled. Create a new profile in run.sh with NAME, or modify one of our existing ones to reference the urdf and checkpoint file of the robot you wish to visualize. use (ijkl) as arrow keys to direct the robot velocity and (u and o) to control yaw.
+Running the receiver.py python script will listen for the UDP message packs that are transmitted when a robot is being played in simulation. You will need to match the target_url of the data receiver and data publisher. The data publisher url can be modified using a command line override to issacgym "task.env.dataPublisher.target_url," and can be specified in the bash profile for playback in `legged_envs/envs/exp.sh`. We provide an example in this file.
+
+```bash
+example(){
+    base
+    task=RobotDog
+    PLAY_ARGS+=(
+        num_envs=1
+        checkpoint=assets/checkpoints/example_frog.pth
+    )
+    BASE_ARGS+=(
+    # task.env.terrain.terrainType=plane
+    ++task.env.urdfAsset.root="assets/urdf/example_frog"
+    task.env.urdfAsset.file="frog.urdf"
+    task.env.randomCommandVelocityRanges.linear_x=[-0.5,0.5]
+    task.env.randomCommandVelocityRanges.linear_y=[-0.5,0.5]
+    task.env.randomCommandVelocityRanges.yaw=[-1,1]
+
+    task.env.dataPublisher.enable=true
+    task.env.dataPublisher.target_url=udp://10.172.14.96:9870
+    )
+}
+```

@@ -25,7 +25,7 @@ def flatten_dict(nested_dict, prefix=None):
             flattened_dict[new_key] = value
     return flattened_dict
 
-def get_subdirectory_configs(sub_directory_path:pathlib.Path,extra_configs, yaml_supplied=True, rough_terrain=False):
+def get_subdirectory_configs(sub_directory_path:pathlib.Path,extra_configs, yaml_supplied=False, rough_terrain=False):
     print(sub_directory_path)
     urdf_path = next(sub_directory_path.rglob("*.urdf"))
     urdf_dir, urdf_base_path = os.path.split(os.path.abspath(urdf_path))
