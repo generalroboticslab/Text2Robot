@@ -7,21 +7,21 @@ def run(context):
         app = adsk.core.Application.get()
         ui  = app.userInterface
 
-        # install_numpy = sys.path[0] +'\Python\python.exe -m pip install numpy'
-        # install_scipy = sys.path[0] +'\Python\python.exe -m pip install scipy'
-        # install_requests = sys.path[0] +'\Python\python.exe -m pip install requests'
-        # install_yaml = sys.path[0] +'\Python\python.exe -m pip install pyyaml'
-        # install_open3d = sys.path[0] +'\Python\python.exe -m pip install open3d'
-        # install_trimesh = sys.path[0] +'\Python\python.exe -m pip install trimesh'
-        # install_pycollada = sys.path[0] +'\Python\python.exe -m pip install pycollada'
+        install_numpy = sys.path[0] +'\Python\python.exe -m pip install numpy'
+        install_scipy = sys.path[0] +'\Python\python.exe -m pip install scipy'
+        install_requests = sys.path[0] +'\Python\python.exe -m pip install requests'
+        install_yaml = sys.path[0] +'\Python\python.exe -m pip install pyyaml'
+        install_open3d = sys.path[0] +'\Python\python.exe -m pip install open3d'
+        install_trimesh = sys.path[0] +'\Python\python.exe -m pip install trimesh'
+        install_pycollada = sys.path[0] +'\Python\python.exe -m pip install pycollada'
 
-        # os.system('cmd /c "' + install_numpy + '"')
-        # os.system('cmd /c "' + install_scipy + '"')
-        # os.system('cmd /c "' + install_open3d + '"')
-        # os.system('cmd /c "' + install_trimesh + '"')
-        # os.system('cmd /c "' + install_pycollada + '"')
-        # os.system('cmd /c "' + install_requests + '"')
-        # os.system('cmd /c "' + install_yaml + '"')
+        os.system('cmd /c "' + install_numpy + '"')
+        os.system('cmd /c "' + install_scipy + '"')
+        os.system('cmd /c "' + install_open3d + '"')
+        os.system('cmd /c "' + install_trimesh + '"')
+        os.system('cmd /c "' + install_pycollada + '"')
+        os.system('cmd /c "' + install_requests + '"')
+        os.system('cmd /c "' + install_yaml + '"')
         
         try:
             import trimesh
