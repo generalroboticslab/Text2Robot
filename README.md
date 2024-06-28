@@ -43,6 +43,7 @@ If you find our paper or codebase helpful, please consider citing:
 ## Project Structure
 ```
 ├── conda_env_py38.yaml                     # Conda enviornment for isaacgym
+├── Assembly Instructions.pdf               # Instructions for print and assembly of bots
 ├── Evolutionary_Algorithm
 │   ├── driver.py                           # Evolutionary algo driver
 │   ├── Example_Frog_Experiment             # Example Experiment URDF_Bank and directory
@@ -156,6 +157,8 @@ bash run.sh example -pk
 to visualize an example checkpoint of an evolved frog. To visualize your own bot, create a new entry in `exp.sh` modeled after `example`. Here you can specify the path to the robot urdf, and the path to the checkpoint file. -pk specifies playback mode, with keyboard input enabled. This will allow you to control the velocity of your robot using (ijkl) as arrow keys and (u and o) to control yaw (rotational velocity). For a full list of playback options, check out `run.sh`. If you run into unexpected errors, make sure you have the conda environment activated!
 
 ## Sim2Real
+
+Instructions for printing and assembling your robot can be found in `Assembly Instructions.pdf`.
 
 For Sim2Real, download the Sim2Real_Receiver/receiver.py folder on to your robots RaspberryPi. You will also need to initialize the servo python control library found at: https://github.com/ethanlipson/PyLX-16A
 
