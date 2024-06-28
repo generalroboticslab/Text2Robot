@@ -9,7 +9,7 @@ Boxi Xia,
 Duke University
 <br>
 
-### [Project Website](http://www.generalroboticslab.com/Text2Robot) | [Video](https://youtu.be/Cwq7G6OUeGg) | [Paper](http://arxiv.org)
+### [Project Website](http://www.generalroboticslab.com/blogs/blog/2024-06-28-text2robot/index.html) | [Video](https://www.youtube.com/watch?v=Cwq7G6OUeGg) | [Paper](http://arxiv.org)
 
 ## Overview
 This repo contains the Fusion360 and Python implementation for paper "Text2Robot." Our pipeline automatically converts a text prompt to a quadrupedal robot. We utilize a state of the art text to mesh generative model as initialization for our pipeline, and convert the static mesh to a kinetic robot model. We evolve the robots control and morphology simultaneously using our evolutionary algorithm.
