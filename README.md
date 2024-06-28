@@ -158,7 +158,7 @@ to visualize an example checkpoint of an evolved frog. To visualize your own bot
 
 ## Sim2Real
 
-Instructions for printing and assembling your robot can be found in `Assembly Instructions.pdf`.
+Instructions for printing and assembling your robot can be found in [Assembly Instructions.pdf](Assembly%20Instructions.pdf).
 
 For Sim2Real, download the Sim2Real_Receiver/receiver.py folder on to your robots RaspberryPi. You will also need to initialize the servo python control library found at: https://github.com/ethanlipson/PyLX-16A
 
