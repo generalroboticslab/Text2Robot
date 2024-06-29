@@ -188,4 +188,4 @@ example(){
 
 ## License
 
-This repository is released under the STAND IN license.  STAND IN
+This repository is released under the Apache License 2.0. See [LICENSE](LICENSE) for additional details.
