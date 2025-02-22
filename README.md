@@ -192,3 +192,7 @@ example(){
 ## License
 
 This repository is released under the Apache License 2.0. See [LICENSE](LICENSE) for additional details.
+
+## Acknowledgement
+
+`This work is supported by DARPA FoundSci program under award HR00112490372, by ARL STRONG program under awards W911NF2320182 and W911NF2220113.`
