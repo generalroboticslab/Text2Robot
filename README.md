@@ -2,7 +2,7 @@
 
 Ryan Ringel,
 [Zachary Charlick](https://zacharycharlick.com),
-Jiaxun Liu,
+[Jiaxun Liu](https://jiaxunliu.com),
 Boxi Xia,
 [Boyuan Chen](http://boyuanchen.com/)
 <br>
