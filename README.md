@@ -102,38 +102,37 @@ For Fusion360 geometric slicing installation, see section [Mesh2CAD](#mesh2cad)
 ## Text2Mesh
 We use the Meshy website https://www.meshy.ai/ to generate STL meshes from text prompts. STL's used in our experiments are provided in `STL_Files/Example_Meshes`. 
 
-![MeshyHomeScreen](https://github.com/generalroboticslab/RobotsMakingRobots/assets/46581478/0fa40918-f86d-4850-900c-a0971a081f2c)
+![MeshyHomeScreen](figures/meshy_instruction.png)
 
 Additional meshes can be generated using Meshy, although they are not guaranteed to work with the provided slicing script. Include the keywords "quadrupedal walking robot" in the text prompt for best results.
 
-![MeshyText](https://github.com/generalroboticslab/RobotsMakingRobots/assets/46581478/72d1d86f-b40e-47d9-823a-877393302f4b)
+![MeshyText](figures/meshy_instruction_2.png)
 
 ## Mesh2CAD
 
 STL meshes can be converted to a fusion360 assembly using the provided sliceBody script. First open Fusion360, and preprocess the generated or downloaded mesh desired. Installation instructions can be found at https://www.autodesk.com/campaigns/education/fusion-360. Insert the mesh into a fusion360 document, and use the convert mesh operation to convert the mesh to a brepboy. Organic mesh conversion is enabled with the fusion design extension.
 
-![InsertMesh](https://github.com/generalroboticslab/RobotsMakingRobots/assets/46581478/6260c319-2e28-4328-9282-bf41ddf6e99f)
-![ConvertMesh](https://github.com/generalroboticslab/RobotsMakingRobots/assets/46581478/752ee300-753c-41fc-bc06-1f0e3ca92f7b)
+![InsertMesh](figures/fusion_instruction.png)
+![ConvertMesh](figures/fusion_instruction_2.png)
 
 To slice the brepbody, add both python scripts in the 'Fusion360_Scripts' folder into Fusion360. To link an add-in in Fusion360, click on the green plus, and navigate to and select the Wrapper and Install_Packages folders.
 
-![AddScripts](https://github.com/generalroboticslab/RobotsMakingRobots/assets/46581478/761fe4d8-8e56-4d94-aae2-a468c2e5c465)
+![AddScripts](figures/fusion_instruction_3.png)
 
 Prior to running the Wrapper script, add "Polyethylene Low Density" material to favorites by navigating to the fusion material library plastics folder, right clicking on polyethylene low density, and adding to favorites. 
 
-![AddMaterial](https://github.com/generalroboticslab/RobotsMakingRobots/assets/46581478/abde0655-7a6f-4fc9-a84d-02c716c1f1b0)
+![AddMaterial](figures/fusion_instruction_4.png)
 
 Run Install_Packages to install necessary python libraries to the same file path as the wrapper script. Running the Wrapper script will convert the preprocessed brepbody to a robot assembly. If the mesh does not properly slice, adjusting the steps in the slicebyDX function of slicebody can adjust the location of shoulder slices.
 
-![AdjustSteps](https://github.com/generalroboticslab/RobotsMakingRobots/assets/46581478/22e2407d-51d0-4c4e-9bb2-3220d6cb2993)
+![AdjustSteps](figures/fusion_instruction_5.png)
 
 
 ## CAD2URDF
 
 Uncommenting the URDF exporter function in wrapper will export the generated robot to a URDF. Uncommenting the loop will create 30 variations of the generated robot, and export all as URDF's. This may take up to 15 minutes.
 
-![URDFExporter](https://github.com/generalroboticslab/RobotsMakingRobots/assets/46581478/2199d1c2-33e8-4c08-9eb5-a24ddb90e0e1)
-
+![URDFExporter](figures/URDF_instruction.png)
 ## Evolutionary Loop
 
 To further evolve robots using our evolutionary algorithm, create an experiment directory similar to our provided example: `Evolutionary_Algorithm/Example_Experiment`. If you wish to make custom changes to the training parameters, you can create a configuration file for the experiment in the `Evolutionary_Algorithm/experiments` directory, modeling it after our example. This directory should contain a folder `URDF_Bank`, which will hold the entire gene pool. We recommend using at least 5 prompts for a total of 150 robot models. If you have fewer, you will need to modify `Evolutionary_Algorithm/init_population` to initialize a smaller first generation. You can include as many robots as you would like!
